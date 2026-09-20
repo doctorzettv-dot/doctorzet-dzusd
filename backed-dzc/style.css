@@ -1,0 +1,29 @@
+:root{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:#f7f9fc;background:#05070b;
+  --line:#293446;--muted:#9ca7b6;--blue:#176cff;--red:#ff334f;--good:#42d78a;--warn:#ffd06a
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:
+radial-gradient(circle at 10% 0%,rgba(23,108,255,.23),transparent 31%),
+radial-gradient(circle at 90% 100%,rgba(255,51,79,.17),transparent 34%),#05070b}
+.wrap{width:min(1120px,94vw);margin:28px auto 70px}
+.hero{display:flex;align-items:center;gap:18px;margin-bottom:16px}
+.coin{width:82px;height:82px;border-radius:50%;display:grid;place-items:center;font-size:27px;font-weight:950;color:#07111c;
+background:linear-gradient(145deg,#fafcff,#7c8898 55%,#273343);border:2px solid #cbd4df;box-shadow:0 18px 55px rgba(0,0,0,.38)}
+h1{margin:0;font-size:clamp(30px,4vw,48px)}.hero p{margin:6px 0 0;color:var(--muted)}
+.notice{border:1px solid #3b4e6a;background:rgba(24,44,72,.5);padding:14px 16px;border-radius:15px;line-height:1.5;margin-bottom:14px}
+.card{background:linear-gradient(180deg,rgba(15,20,29,.97),rgba(8,11,17,.97));border:1px solid var(--line);border-radius:22px;padding:20px;margin:14px 0}
+h2{margin:0 0 16px}.row{display:flex;gap:10px;flex-wrap:wrap}
+button{border:0;border-radius:13px;padding:12px 16px;font-weight:850;background:var(--blue);color:#fff;cursor:pointer}
+button.secondary{background:#171e29;border:1px solid #344156}button:disabled{opacity:.42;cursor:not-allowed}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.grid div{background:#070a0f;border:1px solid #222c3a;border-radius:14px;padding:13px}
+.grid span{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.grid strong{word-break:break-all}
+label{display:block;color:#cfd6df;font-size:13px;margin:12px 0 6px}
+input{width:100%;background:#070a0f;color:#fff;border:1px solid #2d394a;border-radius:12px;padding:12px 13px;font-size:15px}
+.checks{margin:14px 0}.checks label{display:flex;gap:9px;align-items:flex-start}.checks input{width:auto;margin-top:2px}
+.warning{margin-top:14px;padding:12px 14px;border-radius:13px;border:1px solid #5b4619;background:#2e230e;color:var(--warn);line-height:1.5}
+pre{white-space:pre-wrap;word-break:break-word;color:#dce3eb}
+hr{border:0;border-top:1px solid #283343;margin:22px 0}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
