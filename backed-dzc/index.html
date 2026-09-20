@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DoctorZet Backed Coin · Admin</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <div class="coin">DZ</div>
+    <div>
+      <h1>DoctorZet Backed Coin</h1>
+      <p>DZC · Polygon · Reservas USDC + CRC verificadas</p>
+    </div>
+  </header>
+
+  <div class="notice">
+    Cuenta de reserva CRC: BAC San José · <b>CR76 **** **** **** **** 2530</b><br>
+    El IBAN completo, credenciales bancarias y claves privadas no aparecen en esta página.
+  </div>
+
+  <section class="card">
+    <h2>1. Wallet y despliegue</h2>
+    <div class="row">
+      <button id="connect">Conectar MetaMask</button>
+      <button id="compile" class="secondary">Compilar contratos</button>
+      <button id="deployOracle" disabled>Desplegar Oracle CRC</button>
+      <button id="deployToken" disabled>Desplegar DZC</button>
+    </div>
+
+    <div class="grid">
+      <div><span>Wallet</span><strong id="wallet">—</strong></div>
+      <div><span>Red</span><strong id="network">—</strong></div>
+      <div><span>POL</span><strong id="pol">—</strong></div>
+      <div><span>Oracle</span><strong id="oracleAddress">Pendiente</strong></div>
+      <div><span>DZC</span><strong id="tokenAddress">Pendiente</strong></div>
+      <div><span>Admin</span><strong id="admin">—</strong></div>
+    </div>
+
+    <label>Wallet reportera del Oracle</label>
+    <input id="reporterWallet" placeholder="0x...">
+
+    <label>Wallet operadora de pagos CRC</label>
+    <input id="payoutWallet" placeholder="0x...">
+  </section>
+
+  <section class="card">
+    <h2>2. Actualización manual verificada CRC</h2>
+
+    <label>Saldo disponible CRC verificado en BAC</label>
+    <input id="crcReserve" type="number" min="0" step="0.01" placeholder="Ej. 250000000">
+
+    <label>Tipo de cambio CRC por USD verificado</label>
+    <input id="crcRate" type="number" min="0.000001" step="0.000001" placeholder="Ej. 500.25">
+
+    <label>Referencia interna</label>
+    <input id="reference" placeholder="Ej. ESTADO-BAC-2026-09-20-001">
+
+    <div class="checks">
+      <label><input id="checkBalance" type="checkbox"> Revisé el saldo disponible en BAC.</label>
+      <label><input id="checkPending" type="checkbox"> Revisé débitos y transferencias pendientes.</label>
+      <label><input id="checkRate" type="checkbox"> Verifiqué el tipo de cambio y la hora de consulta.</label>
+    </div>
+
+    <div class="row">
+      <button id="publishReserve" disabled>Publicar reserva en Polygon</button>
+      <button id="exportAttestation" class="secondary">Descargar comprobante JSON</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>3. Reservas y capacidad de emisión</h2>
+    <div class="grid">
+      <div><span>Supply DZC</span><strong id="supply">—</strong></div>
+      <div><span>USDC en contrato</span><strong id="usdcReserve">—</strong></div>
+      <div><span>CRC reportados</span><strong id="rawCrc">—</strong></div>
+      <div><span>CRC ajustados</span><strong id="adjustedCrc">—</strong></div>
+      <div><span>Valor CRC en USD</span><strong id="crcUsd">—</strong></div>
+      <div><span>Reserva total USD</span><strong id="totalReserve">—</strong></div>
+      <div><span>Capacidad para crear</span><strong id="mintCapacity">—</strong></div>
+      <div><span>Respaldo</span><strong id="backed">—</strong></div>
+      <div><span>Oracle actualizado</span><strong id="oracleTime">—</strong></div>
+    </div>
+
+    <label>USDC a depositar como reserva on-chain</label>
+    <input id="usdcDeposit" type="number" min="0" step="0.000001" placeholder="Ej. 1000">
+    <div class="row">
+      <button id="depositUsdc" disabled>Depositar USDC al contrato</button>
+      <button id="refresh" class="secondary" disabled>Actualizar panel</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>4. Crear DZC como administrador</h2>
+    <label>Wallet receptora</label>
+    <input id="mintTo" placeholder="0x...">
+    <label>Cantidad DZC</label>
+    <input id="mintAmount" type="number" min="0" step="0.000001" value="1000000">
+
+    <div class="row">
+      <button id="mintCustom" disabled>Crear cantidad</button>
+      <button id="mint1m" disabled>Crear 1,000,000</button>
+      <button id="mint10m" disabled>Crear 10,000,000</button>
+      <button id="mint100m" disabled>Crear 100,000,000</button>
+      <button id="addToken" class="secondary" disabled>Agregar DZC a MetaMask</button>
+    </div>
+
+    <div class="warning">
+      Los botones no pueden superar la capacidad de emisión respaldada. Si las reservas verificadas no alcanzan, Polygon revierte la transacción.
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>5. Redención</h2>
+    <label>DZC a canjear por USDC</label>
+    <input id="redeemUsdcAmount" type="number" min="0" step="0.000001">
+    <button id="redeemUsdc" disabled>Canjear DZC por USDC</button>
+
+    <label>DZC a solicitar en pago CRC</label>
+    <input id="redeemCrcAmount" type="number" min="0" step="0.000001">
+    <button id="requestCrc" disabled>Solicitar pago en CRC</button>
+
+    <hr>
+    <label>ID de solicitud CRC</label>
+    <input id="requestId" type="number" min="1" step="1">
+    <div class="row">
+      <button id="completeCrc" disabled>Confirmar pago bancario y quemar DZC</button>
+      <button id="cancelCrc" class="secondary" disabled>Cancelar solicitud</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Estado</h2>
+    <pre id="status">Conecta MetaMask para comenzar.</pre>
+  </section>
+</main>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>
