@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#05070b">
+  <title>DoctorZet DZUSD · Polygon Deployer</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <img src="./dzusd-logo.svg" class="logo" alt="DoctorZet DZUSD">
+    <div>
+      <h1>DoctorZet USD Coin</h1>
+      <div class="sub">DZUSD · Polygon PoS · Respaldado 1:1 por USDC depositado</div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>Despliegue en Polygon Mainnet</h2>
+
+      <div class="row">
+        <span class="badge"><span id="networkDot" class="dot"></span><span id="network">Sin conectar</span></span>
+        <span class="badge">Wallet: <strong id="wallet">—</strong></span>
+        <span class="badge">Gas: <strong id="pol">— POL</strong></span>
+      </div>
+
+      <div class="row" style="margin-top:14px">
+        <button id="connect" class="blue">Conectar MetaMask</button>
+        <button id="compile" class="secondary">Compilar contrato</button>
+        <button id="estimate" class="secondary">Calcular gas</button>
+      </div>
+
+      <div class="box">
+        <div class="row">
+          <span class="badge"><span id="compileDot" class="dot"></span><span id="compileState">Sin compilar</span></span>
+          <span class="badge">Gas estimado: <strong id="gas">—</strong></span>
+        </div>
+      </div>
+
+      <label class="check">
+        <input id="confirm" type="checkbox">
+        <span>Confirmo que el despliegue será una transacción real en Polygon PoS. MetaMask mostrará el costo y solicitará mi firma. El gas se paga en POL.</span>
+      </label>
+
+      <button id="deploy" class="red" disabled>Desplegar DZUSD en Polygon</button>
+
+      <hr>
+
+      <label>Transacción de despliegue</label>
+      <div class="box mono" id="txHash">Pendiente</div>
+      <a id="txLink" hidden target="_blank" rel="noopener">Abrir transacción en Polygonscan</a>
+
+      <label>Dirección final DZUSD</label>
+      <div class="box mono" id="contractAddress">Pendiente de despliegue</div>
+      <div class="row" style="margin-top:10px">
+        <a id="contractLink" hidden target="_blank" rel="noopener">Abrir contrato en Polygonscan</a>
+        <button id="addToken" class="secondary" disabled>Agregar DZUSD a MetaMask</button>
+      </div>
+
+      <div class="box status" id="status">Conecta MetaMask para comenzar.</div>
+    </section>
+
+    <aside class="panel">
+      <h2>Datos del token</h2>
+      <div class="kpis">
+        <div class="kpi"><small>Suministro</small><strong id="supply">0 DZUSD</strong></div>
+        <div class="kpi"><small>Reserva</small><strong id="reserve">0 USDC</strong></div>
+        <div class="kpi"><small>Respaldo</small><strong id="backed">—</strong></div>
+      </div>
+
+      <div class="box">
+        <small>Tu saldo</small>
+        <div class="big" id="dzbal">0 DZUSD</div>
+        <div id="crc" class="sub">≈ ₡0 CRC</div>
+        <div class="note" style="margin-top:8px">Tipo de cambio: <span id="rate">consultando…</span></div>
+      </div>
+
+      <button id="refresh" class="secondary" disabled>Actualizar datos</button>
+
+      <hr>
+
+      <h2>Emitir DZUSD con USDC</h2>
+      <label>USDC a depositar</label>
+      <input id="depositAmount" type="number" min="0" step="0.000001" placeholder="100">
+      <button id="depositBtn" class="blue" disabled>Depositar USDC y recibir DZUSD</button>
+
+      <h2 style="margin-top:22px">Redimir DZUSD</h2>
+      <label>DZUSD a redimir</label>
+      <input id="redeemAmount" type="number" min="0" step="0.000001" placeholder="100">
+      <button id="redeemBtn" class="secondary" disabled>Quemar DZUSD y recibir USDC</button>
+
+      <hr>
+
+      <div class="note">
+        USDC nativo de Polygon:<br>
+        <span class="mono">0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359</span><br><br>
+        Solidity: 0.8.24<br>
+        Chain ID: 137<br>
+        Símbolo gas: POL<br><br>
+        La página nunca pide frase semilla ni clave privada. Las firmas ocurren dentro de MetaMask.
+      </div>
+    </aside>
+  </div>
+</div>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
